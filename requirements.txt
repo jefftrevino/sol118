@@ -1,0 +1,5 @@
+shapely
+matplotlib
+chiplotle
+ipdb
+ipython
