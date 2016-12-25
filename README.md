@@ -1,3 +1,3 @@
-# Snowflakes
+# Sol118
 
-Python scripts for drawing snowflake shapes on a pen plotter
+Python scripts for drawing Sol LeWitt's wall drawing #118. 
