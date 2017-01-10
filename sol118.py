@@ -10,17 +10,32 @@ def points_to_coord_tuples(points):
     return [(p.x, p.y) for p in points]
 
 
+def interpolate_along_line(numPoints, the_line):
+    print("the line before:", len(the_line.xy[0]))
+    '''
+    Returns a new LineString that interpolates n points along the line.
+    '''
+    points = []
+    for x in range(0, numPoints + 1):
+        newPoint = the_line.interpolate(float(x)/numPoints, normalized=True)
+        points.append(newPoint)
+    coords = points_to_coord_tuples(points)
+    output_line = LineString(coords)
+    print("the line after:", len(output_line.xy[0]))
+    return LineString(coords)
+
+
 def run(seed_int):
     set_seed(seed_int)
     drawing = Drawing()
     x_offset = -11.5
     y_offset = -8.5
-    horizontal_margin = .5
-    vertical_margin = .5
+    horizontal_margin = 2
+    vertical_margin = 2
     point_x_min = horizontal_margin
-    point_x_max = 5-horizontal_margin
+    point_x_max = 24 - horizontal_margin
     point_y_min = vertical_margin
-    point_y_max = 3-vertical_margin
+    point_y_max = 18 - vertical_margin
     points = [
         Point(
             uniform(point_x_min, point_x_max) + x_offset,
@@ -32,6 +47,7 @@ def run(seed_int):
         for i in range(50):
             if e != i:
                 line = LineString([coord_tuple, coord_tuples[i]])
+                line = interpolate_along_line(10, line)
                 drawing.add(line)
     # line = LineString([(0, 0), (drawing.width, drawing.height)])
     drawing.add(line)
@@ -40,5 +56,5 @@ def run(seed_int):
     return drawing
 
 if __name__ == '__main__':
-    for seed_int in range(20, 40):
+    for seed_int in range(3):
         drawing = run(seed_int)

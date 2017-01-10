@@ -40,7 +40,7 @@ class Drawing:
         self.scalar = default_scale
         self.paper = None
         self.paper_origin = Point(-11.7850105901, -8.765625)
-        self.add_paper(5, 3)
+        self.add_paper(24, 18)
 
     def get_bounds(self):
         self.bounds_poly = Polygon([
